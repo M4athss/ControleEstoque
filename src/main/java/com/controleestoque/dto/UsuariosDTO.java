@@ -8,9 +8,9 @@ import java.util.Objects;
 public class UsuariosDTO {
 
     private long id;
-
     private String nome;
     private String email;
+    private boolean status;
 
     public UsuariosDTO() {
     }
@@ -19,6 +19,8 @@ public class UsuariosDTO {
         this.id = entity.getId();
         this.nome = entity.getNome();
         this.email = entity.getEmail();
+        this.status = entity.getStatus();
+
     }
 
     public long getId() {
@@ -31,6 +33,10 @@ public class UsuariosDTO {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     @Override

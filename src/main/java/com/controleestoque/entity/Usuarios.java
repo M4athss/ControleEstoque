@@ -1,6 +1,9 @@
 package com.controleestoque.entity;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,15 +19,16 @@ public class Usuarios {
     private String nome;
     private String email;
     private String senha;
-    private long idgrupo;
-    private Date dtcriacao;
+    private Long idgrupo;
+    private LocalDate dtcriacao;
     private String cpf;
-    private long idpapel;
+    private Long idpapel;
+    private boolean status;
 
     public Usuarios() {
     }
 
-    public Usuarios(long id, String nome, String email, String senha, long idgrupo, Date dtcriacao, String cpf, long idpapel) {
+    public Usuarios(Long id, String nome, String email, String senha, Long idgrupo, LocalDate dtcriacao, String cpf, Long idpapel, boolean status) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -33,9 +37,10 @@ public class Usuarios {
         this.dtcriacao = dtcriacao;
         this.cpf = cpf;
         this.idpapel = idpapel;
+        this.status = status;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,11 +56,11 @@ public class Usuarios {
         this.senha = senha;
     }
 
-    public void setIdgrupo(long idgrupo) {
+    public void setIdgrupo(Long idgrupo) {
         this.idgrupo = idgrupo;
     }
 
-    public void setDtcriacao(Date dtcriacao) {
+    public void setDtcriacao(LocalDate dtcriacao) {
         this.dtcriacao = dtcriacao;
     }
 
@@ -63,11 +68,15 @@ public class Usuarios {
         this.cpf = cpf;
     }
 
-    public void setIdpapel(long idpapel) {
+    public void setIdpapel(Long idpapel) {
         this.idpapel = idpapel;
     }
 
-    public long getId() {
+    public void setStatus(boolean status){
+        this.status = status;
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -77,6 +86,30 @@ public class Usuarios {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public Long getIdgrupo() {
+        return idgrupo;
+    }
+
+    public LocalDate getDtcriacao() {
+        return dtcriacao;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public Long getIdpapel() {
+        return idpapel;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 
     @Override
