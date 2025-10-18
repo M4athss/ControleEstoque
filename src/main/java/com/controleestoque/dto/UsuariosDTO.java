@@ -8,8 +8,11 @@ import java.util.Objects;
 public class UsuariosDTO {
 
     private long id;
+    private String cpf;;
     private String nome;
     private String email;
+    private long idpapel;
+    private long idgrupo;
     private boolean status;
 
     public UsuariosDTO() {
@@ -17,8 +20,12 @@ public class UsuariosDTO {
 
     public UsuariosDTO(Usuarios entity) {
         this.id = entity.getId();
+        this.cpf = entity.getCpf();
         this.nome = entity.getNome();
         this.email = entity.getEmail();
+        this.idpapel = entity.getIdpapel();
+        this.idgrupo = entity.getIdgrupo();
+
         this.status = entity.getStatus();
 
     }
@@ -27,13 +34,17 @@ public class UsuariosDTO {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getCpf() { return cpf; }
+
+    public String getNome() { return nome; }
 
     public String getEmail() {
         return email;
     }
+
+    public long getIdpapel() { return idpapel; }
+
+    public long getIdgrupo() { return idgrupo; }
 
     public boolean isStatus() {
         return status;
