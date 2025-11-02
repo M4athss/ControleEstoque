@@ -6,23 +6,32 @@ import org.springframework.cglib.core.Local;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
 
 
 @Entity
 @Table(name = "TBUSUARIOS")
-public class Usuarios {
+public class Usuarios implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String nome;
+
+    @Column(unique = true)
     private String email;
     private String senha;
-    private Long idgrupo;
+
+    @Column(nullable = false)
+    private Long idgrupo = 1L;
     private LocalDate dtcriacao;
     private String cpf;
-    private Long idpapel;
+
+    @Column(nullable = false)
+    private Long idpapel = 1L;
     private boolean status;
 
     public Usuarios() {
@@ -56,9 +65,7 @@ public class Usuarios {
         this.senha = senha;
     }
 
-    public void setIdgrupo(Long idgrupo) {
-        this.idgrupo = idgrupo;
-    }
+    public void setIdgrupo(Long idgrupo) { this.idgrupo = idgrupo; }
 
     public void setDtcriacao(LocalDate dtcriacao) {
         this.dtcriacao = dtcriacao;
@@ -68,9 +75,7 @@ public class Usuarios {
         this.cpf = cpf;
     }
 
-    public void setIdpapel(Long idpapel) {
-        this.idpapel = idpapel;
-    }
+    public void setIdpapel(Long idpapel) { this.idpapel = idpapel; }
 
     public void setStatus(boolean status){
         this.status = status;
@@ -122,5 +127,42 @@ public class Usuarios {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Quando tiver "Roles" (Papeis), vamos tentar retornar aqui.
+        // Por enquanto, podemos retornar uma lista vazia.
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha; // Retorna o campo da sua senha
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email; // Usaremos o e-mail como "username"
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; // Deixe true
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true; // Deixe true
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true; // Deixe true
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true; // Deixe true
     }
 }

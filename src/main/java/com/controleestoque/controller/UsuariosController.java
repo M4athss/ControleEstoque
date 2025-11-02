@@ -3,6 +3,7 @@ package com.controleestoque.controller;
 import com.controleestoque.dto.UsuariosDTO;
 import com.controleestoque.entity.Usuarios;
 import com.controleestoque.service.UsuarioService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,4 @@ public class UsuariosController {
         }
         return null;
     }
-
 }
