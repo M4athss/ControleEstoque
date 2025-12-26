@@ -1,24 +1,15 @@
-package com.controleestoque.entity;
-
+package com.controleestoque.infra.persistence.h2.usuario;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
-
 
 @Entity
 @Table(name = "TBUSUARIOS")
-public class Usuarios implements UserDetails {
+public class UsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String nome;
 
     @Column(unique = true)
@@ -31,13 +22,12 @@ public class Usuarios implements UserDetails {
     private String cpf;
 
     @Column(nullable = false)
-    private Long idpapel = 1L;
     private boolean status;
 
-    public Usuarios() {
+    public UsuarioEntity() {
     }
 
-    public Usuarios(Long id, String nome, String email, String senha, Long idgrupo, LocalDate dtcriacao, String cpf, Long idpapel, boolean status) {
+    public UsuarioEntity(Long id, String nome, String email, String senha, Long idgrupo, LocalDate dtcriacao, String cpf, boolean status) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -45,7 +35,6 @@ public class Usuarios implements UserDetails {
         this.idgrupo = idgrupo;
         this.dtcriacao = dtcriacao;
         this.cpf = cpf;
-        this.idpapel = idpapel;
         this.status = status;
     }
 
@@ -74,8 +63,6 @@ public class Usuarios implements UserDetails {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-    public void setIdpapel(Long idpapel) { this.idpapel = idpapel; }
 
     public void setStatus(boolean status){
         this.status = status;
@@ -109,10 +96,6 @@ public class Usuarios implements UserDetails {
         return cpf;
     }
 
-    public Long getIdpapel() {
-        return idpapel;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -120,8 +103,8 @@ public class Usuarios implements UserDetails {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Usuarios usuarios = (Usuarios) o;
-        return id == usuarios.id;
+        UsuarioEntity usuarioEntity = (UsuarioEntity) o;
+        return id == usuarioEntity.id;
     }
 
     @Override
@@ -129,40 +112,4 @@ public class Usuarios implements UserDetails {
         return Objects.hashCode(id);
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Quando tiver "Roles" (Papeis), vamos tentar retornar aqui.
-        // Por enquanto, podemos retornar uma lista vazia.
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.senha; // Retorna o campo da sua senha
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email; // Usaremos o e-mail como "username"
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true; // Deixe true
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true; // Deixe true
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true; // Deixe true
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true; // Deixe true
-    }
 }

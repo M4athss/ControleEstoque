@@ -1,8 +1,7 @@
-package com.controleestoque.dto;
+package com.controleestoque.controller.usuario;
 
-import com.controleestoque.entity.Usuarios;
+import com.controleestoque.infra.persistence.h2.usuario.UsuarioEntity;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class UsuariosDTO {
@@ -11,19 +10,17 @@ public class UsuariosDTO {
     private String cpf;;
     private String nome;
     private String email;
-    private long idpapel;
     private long idgrupo;
     private boolean status;
 
     public UsuariosDTO() {
     }
 
-    public UsuariosDTO(Usuarios entity) {
+    public UsuariosDTO(UsuarioEntity entity) {
         this.id = entity.getId();
         this.cpf = entity.getCpf();
         this.nome = entity.getNome();
         this.email = entity.getEmail();
-        this.idpapel = entity.getIdpapel();
         this.idgrupo = entity.getIdgrupo();
 
         this.status = entity.getStatus();
@@ -41,8 +38,6 @@ public class UsuariosDTO {
     public String getEmail() {
         return email;
     }
-
-    public long getIdpapel() { return idpapel; }
 
     public long getIdgrupo() { return idgrupo; }
 
