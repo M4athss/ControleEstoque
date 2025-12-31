@@ -19,7 +19,7 @@ public class UsuariosController {
 
     @GetMapping(value = "")
     public List<UsuariosDTO> findall() {
-        return usuarioservico.findall();
+        return null;
     }
 
     //CRIAR UM MODELO DE USUARIOAPIREQUEST OU USUARIOAPIRESPONSE

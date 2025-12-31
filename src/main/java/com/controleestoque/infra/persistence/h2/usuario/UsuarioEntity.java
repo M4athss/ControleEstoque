@@ -17,7 +17,7 @@ public class UsuarioEntity {
     private String senha;
 
     @Column(nullable = false)
-    private Long idgrupo = 1L;
+    private Long idgrupo;
     private LocalDate dtcriacao;
     private String cpf;
 
