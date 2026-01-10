@@ -1,5 +1,6 @@
 package com.controleestoque.domain.usuario;
 
+import com.controleestoque.domain.usuario.model.Usuario;
 import com.controleestoque.infra.persistence.h2.usuario.UsuarioEntity;
 import com.controleestoque.infra.persistence.h2.usuario.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,14 @@ public class UsuarioService {
     private UsuariosRepository usuarioRepository;
 
     //EXEMPLO DE ESTRUTURA
-    public List<Usuario> findall(){
+/*    public List<Usuario> findall(){
         List<UsuarioEntity> result = usuarioRepository.findAll();
         List<Usuario> usuarios = new ArrayList<>(result.size());
-        for(UsuarioEntity entity:result){
-            usuarios.add(new Usuario(entity.getNome(),entity.getEmail()));
+        for(UsuarioEntity entity : result){
+            usuarios.add(new Usuario(entity.getNome(),entity.getEmail());
         }
         return usuarios;
-    }
+    }*/
     //PENSAR EM NOMES MAIS CONDIZENTES COM A FUNCAO
 
     public void add(UsuarioEntity entidade){

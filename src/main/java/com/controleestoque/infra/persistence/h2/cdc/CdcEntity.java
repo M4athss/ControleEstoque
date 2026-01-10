@@ -53,7 +53,7 @@ public class CdcEntity {
         this.nome = nome;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
