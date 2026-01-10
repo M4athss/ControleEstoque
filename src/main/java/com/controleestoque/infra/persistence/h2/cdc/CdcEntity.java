@@ -29,6 +29,17 @@ public class CdcEntity {
         this.status = status;
     }
 
+    public CdcEntity(String codigo, String nome, boolean status) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.status = status;
+    }
+
+    public CdcEntity(String codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+    }
+
     public Long getId() {
         return id;
     }

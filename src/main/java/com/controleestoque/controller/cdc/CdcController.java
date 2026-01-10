@@ -22,7 +22,7 @@ public class CdcController {
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<List<Cdc>> buscarCodigo(@PathVariable("codigo") String codigo){
+    public ResponseEntity<Cdc> buscarCodigo(@PathVariable("codigo") String codigo){
         return ResponseEntity.status(HttpStatus.OK).body(cdcservice.buscarCodigo(codigo));
     }
 
@@ -30,5 +30,18 @@ public class CdcController {
     public ResponseEntity<List<Cdc>> buscarAtivosInativos(@PathVariable("status") boolean status){
         return ResponseEntity.status(HttpStatus.OK).body(cdcservice.buscarAtivosInativos(status));
     }
+
+    @PostMapping(produces = "application/json")
+    public ResponseEntity<?> salvar(@RequestBody CdcRequest cdc){
+        cdcservice.salvarCdc(cdc);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/update/{codigo}")
+    public ResponseEntity<CdcRespose> atualizarNome(@RequestBody CdcRequest cdc){
+        cdcservice.atualizarNome(cdc);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
 
 }

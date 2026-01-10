@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CdcRepository extends JpaRepository<CdcEntity, Long> {
 
-    List<CdcEntity> findByCodigo(String codigo);
+    CdcEntity findByCodigo(String codigo);
 
     List<CdcEntity> findByStatus(boolean status);
 }

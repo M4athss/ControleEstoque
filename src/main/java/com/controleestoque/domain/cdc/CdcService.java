@@ -1,5 +1,7 @@
 package com.controleestoque.domain.cdc;
 
+import com.controleestoque.controller.cdc.CdcRequest;
+import com.controleestoque.controller.cdc.CdcRespose;
 import com.controleestoque.domain.cdc.model.Cdc;
 import com.controleestoque.infra.persistence.h2.cdc.CdcEntity;
 import com.controleestoque.infra.persistence.h2.cdc.CdcRepository;
@@ -26,11 +28,9 @@ public class CdcService {
     }
 
 
-    public List<Cdc> buscarCodigo(String codigo){
-        List<CdcEntity> repo = cdcrepository.findByCodigo(codigo);
-        return repo.stream()
-                .map(Cdc :: new)
-                .toList();
+    public Cdc buscarCodigo(String codigo){
+        CdcEntity repo = cdcrepository.findByCodigo(codigo);
+        return  new Cdc(repo.getCodigo(), repo.getNome(), repo.getStatus());
     }
 
     public List<Cdc> buscarAtivosInativos(boolean status) {
@@ -38,6 +38,23 @@ public class CdcService {
         return repo.stream()
                 .map(Cdc::new)
                 .toList();
+    }
+
+    public void salvarCdc(CdcRequest cdc){
+        if (cdc.codigo().length() > 3 || cdc.codigo() == null || cdc.nome() == null) {
+            throw new IllegalArgumentException("valores invalidos, apenas codigo com 3 caracteres e valores nao nulos");
+        } else {
+            CdcEntity repo = new CdcEntity(cdc.codigo(),cdc.nome(),true);
+            cdcrepository.save(repo);
+        }
+    }
+
+    public CdcRespose atualizarNome(CdcRequest cdc){
+        CdcEntity novo = new CdcEntity(cdc.codigo(),cdc.nome());
+        CdcEntity repo = cdcrepository.findByCodigo(novo.getCodigo());
+        repo.setNome(novo.getNome());
+        cdcrepository.save(repo);
+        return new CdcRespose(repo.getCodigo(), repo.getNome(),repo.getStatus());
     }
 
 
